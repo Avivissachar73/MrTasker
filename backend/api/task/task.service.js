@@ -58,7 +58,28 @@ function createTask(title, description) {
 }
 
 
-var taskQue = [];
+var taskQue = [
+//     {
+//     "_id": "W3L8WW2PVX-174B5C5D306",
+//     "title": "do this",
+//     "description": "wowowowow",
+//     "importance": 3,
+//     "createdAt": 1600777474819,
+//     "lastTriedAt": null,
+//     "triesCount": 0,
+//     "doneAt": null
+//   },
+//   {
+//     "_id": "J1E5RAX0CR-174B5C5D306",
+//     "title": "do that",
+//     "description": "WAWAWAW",
+//     "importance": 2,
+//     "createdAt": 1600777474819,
+//     "lastTriedAt": null,
+//     "triesCount": 0,
+//     "doneAt": null
+//   }
+];
 
 
 setInterval(tryTasks, 5000);
@@ -67,7 +88,7 @@ setInterval(tryTasks, 5000);
 async function tryTask(id) {
     const task = await get(id);
     try {
-        console.log('trying in try task', task, id);
+        // console.log('trying in try task', task, id);
         await executeTask(task);
     } catch(err) {
         taskQue.push(task);
@@ -78,7 +99,7 @@ async function tryTask(id) {
 
 async function tryTasks() {
     const task = (() => {
-        taskQue = taskQue.sort((task1, task2) => task2.importance - task1.importance);
+        taskQue.sort((task1, task2) => task2.importance - task1.importance);
         taskQue.sort((task1, task2) => task1.triesCount - task2.triesCount);
         if (taskQue.length) console.log(taskQue);
         else console.log('que is empty');
@@ -87,16 +108,16 @@ async function tryTasks() {
     if (!task) return;
     try {
         await executeTask(task);
-        // taskQue.shift();
+        taskQue.shift();
     } catch(err) {
-    } finally {
-        if (task.doneAt) taskQue.shift();
-    } 
+    }
 }
 
 
 async function executeTask(task) {
     task.triesCount++;
+    task.lastTriedAt = Date.now();
+    
     if (Math.random() > 0.5) task.doneAt = Date.now();
 
     await save(task);

@@ -19,10 +19,6 @@ router.delete(API + '/:id', taskController.remove);
 
 
 router.post('/:id/start', taskController.tryTask);
-// router.post('start/:id', (req, res) => {
-//     console.log('starting?');
-//     return taskController.tryTask(req, res);
-// });
 
 module.exports = router;
 

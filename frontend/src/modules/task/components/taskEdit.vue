@@ -17,9 +17,6 @@
 
 
 <script>
-    // import taskService from '../task.service.js';
-    // import eventBus from '../../../services/eventBus.service.js';
-
     export default {
         name: 'task-edit',
         data() {
@@ -36,13 +33,10 @@
         methods: {
             async loadTask() {
                 var id = this.$route.params._id;
-                // this.task = await taskService.get(id);
                 this.task = {...await this.$store.dispatch({type: 'getTask', id})};
             },
             async saveTask() {
-                // var task = await taskService.save(this.task);
                 var task = await this.$store.dispatch({type: 'saveTask', task: this.task});
-                // eventBus.$emit('task-saved', task);
                 this.close();
             },
             close() {

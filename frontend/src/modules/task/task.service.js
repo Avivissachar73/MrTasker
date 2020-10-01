@@ -10,7 +10,7 @@ export default {
     get,
     remove,
     save,
-    getEmptyTask,
+    // getEmptyTask,
 
     execute
 }
@@ -45,13 +45,13 @@ function save(task) {
 
 function execute(id) {
     console.log('in service,', `${KEY}/start/${id}`);
-    return httpService.post(`${KEY}/${id}/start`, {});
+    return httpService.post(`${KEY}/${id}/start`);
 }
 
 
-function getEmptyTask() {
-    return _createTask();
-}
+// function getEmptyTask() {
+//     return _createTask();
+// }
 
 
 function _createTask(title = '', description = '', importance = 1) {

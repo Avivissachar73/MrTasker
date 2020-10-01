@@ -3,7 +3,7 @@
         <li v-for="task in tasks" :key="task._id" class="flex column">
             <router-link :to="'/task/'+task._id">
                 <task-preview :task="task">
-                    <div @click.stop.prevent="() => false" class="actions width-all flex align-center space-between">
+                    <div @click.stop.prevent="" class="actions width-all flex align-center space-between">
                         <router-link :to="'/task/edit/'+task._id">Edit</router-link>
                         <button class="remove-btn" @click="execute(task._id)">execute</button>
                         <button class="remove-btn" @click="remove(task._id)">Remove</button>
